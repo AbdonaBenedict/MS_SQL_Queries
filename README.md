@@ -3,6 +3,10 @@ Basic Queries of Microsoft SQL Server
 
 Use AdventureWorks2019;
 
+
+
+
+
 select 
 * from HumanResources.Shift;
 
