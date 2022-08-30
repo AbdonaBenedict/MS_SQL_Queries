@@ -149,5 +149,45 @@ select DepartmentID,Name
 
  select CURRENT_TIMESTAMP;
 
+ select SalesOrderID, sum(TaxAmt) AS TaxAmountTotal
+ from Sales.SalesOrderHeader
+ GROUP BY SalesOrderID
+ HAVING SUM(TaxAmt) > 10000
+ ORDER BY SalesOrderID DESC;
 
+ --From->Where->Group By->Having->Select->Order by
+
+ select PurchaseOrderID, EmployeeID
+ from Purchasing.PurchaseOrderHeader;
+
+ select PurchaseOrderID, PurchaseOrderDetailID
+ from Purchasing.PurchaseOrderDetail;
+
+ select PurchaseOrderID, EmployeeID 
+ from Purchasing.PurchaseOrderHeader where PurchaseOrderID IN 
+ (Select PurchaseOrderID from Purchasing.PurchaseOrderDetail where PurchaseOrderID > 50);
+
+ select BusinessEntityID
+ from HumanResources.Employee
+ UNION 
+ select BusinessEntityID
+ from Person.Person
+ UNION 
+ select CustomerID
+ from Sales.Customer;
+
+ select BusinessEntityID
+ from HumanResources.Employee
+ UNION ALL 
+ select BusinessEntityID
+ from Person.Person
+ UNION ALL
+ select CustomerID
+ from Sales.Customer;
+
+ select pod.PurchaseOrderID, pod.PurchaseOrderDetailID, poh.EmployeeID
+ from Purchasing.PurchaseOrderDetail pod
+ INNER JOIN
+ Purchasing.PurchaseOrderHeader poh
+ ON pod.PurchaseOrderID = poh.PurchaseOrderID;
 
